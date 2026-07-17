@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 import requests
+from version import __version__ 
 
 class ModrinthClient:
   API = "https://api.modrinth.com/v3"
@@ -38,7 +39,7 @@ class ModrinthClient:
       url,
       timeout=30,
       headers={
-          "User-Agent": "collection_download/0.1"
+          "User-Agent": f"collection_download/{__version__}"
       }
     )
 

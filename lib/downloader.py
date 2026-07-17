@@ -3,15 +3,8 @@ from colorama import Fore
 
 class Downloader:
   def download_mods(mods, configs):
-    
-    print(f"Collection: {configs.collection}")
-    print(f"Minecraft: {configs.mc_version}")
-    print("** DRY RUN **") if configs.dry_run else None
-    print()
-
     total = len(mods)
-
-    print(f"Found {total} mods")
+    print(f"Found {total} mods to download")
     print()
 
     downloaded = []
@@ -58,7 +51,7 @@ class Downloader:
     print("=" * 50)
 
     print(
-      f"{configs.dry_run and 'Would have ' or ''}Downloaded: {len(downloaded)}"
+      f"{configs.dry_run and 'Would have d' or 'D'}ownloaded: {len(downloaded)}"
     )
     print(
       f"Missing: {len(missing)}"

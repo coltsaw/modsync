@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 import requests
 from lib.modrinth_client import ModrinthClient
-from os import path
 
 @dataclass
 class Mod:
@@ -53,7 +52,7 @@ class Mod:
           "name": self.name
         }
       
-      output = path.join(destination, self.file_name)
+      output = destination / self.file_name
 
       resp = {
         "status": "available",

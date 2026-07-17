@@ -22,6 +22,6 @@ class Configs:
       mc_version=args.mc_version,
       loader=args.loader,
       collection=Configs.parse_collection_id(args.collection),
-      output=args.output if args.output else "downloads",
+      output=args.output,
       dry_run=args.dry_run
     )

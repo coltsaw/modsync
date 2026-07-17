@@ -39,6 +39,7 @@ class Arguments:
       "--output",
       required=False,
       type=Path,
+      default=Path("downloads"),
       help="Output directory for downloaded mods"
     )
 

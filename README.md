@@ -84,11 +84,9 @@ modsync \
 
 Planned features include:
 
-* Configuration files
 * Dependency resolution
 * Automatic update checking
 * `.mrpack` export
-* GitHub Actions release builds
 
 ---
 
@@ -107,6 +105,16 @@ Whether you'd like to:
 please feel free to open an issue or submit a pull request.
 
 If you're planning a large change, opening an issue first to discuss the idea is appreciated.
+
+---
+
+## Creating a Release
+
+Run:
+
+```bash
+python release.py
+```
 
 ---
 

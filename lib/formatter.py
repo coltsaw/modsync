@@ -3,8 +3,7 @@ from colorama import Fore, Style
 class Formatter:
   COLLECTION_COLORS = [
     Fore.BLUE, Fore.MAGENTA, 
-    Fore.CYAN, Fore.YELLOW,
-    Fore.BLACK
+    Fore.CYAN, Fore.YELLOW
   ]
 
   def success(text):

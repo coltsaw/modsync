@@ -55,13 +55,14 @@ class Mod:
           "collection": self.collection_id
         }
       
-      output = destination / self.file_name
-
       resp = {
         "status": "available",
         "name": self.name,
         "collection": self.collection_id
       }
+
+      output = destination / self.file_name
+      output.parent.mkdir(parents=True, exist_ok=True)
 
       if not dry_run:
         with open(output, "wb") as file:

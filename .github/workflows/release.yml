@@ -6,8 +6,19 @@ on:
       - "v*"
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            platform: windows
+            extension: .exe
+
+          - os: ubuntu-latest
+            platform: linux
+            extension: ""
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout
@@ -17,6 +28,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: "pip"
 
       - name: Install dependencies
         run: |
@@ -25,11 +37,10 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --name modsync main.py
+          pyinstaller --onefile --name modsync-${{ matrix.platform }} main.py
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          files: |
-            dist/modsync.exe
+          files: dist/modsync-${{ matrix.platform }}${{ matrix.extension }}

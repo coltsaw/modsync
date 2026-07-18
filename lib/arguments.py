@@ -31,6 +31,7 @@ class Arguments:
 
     parser.add_argument(
       "--collection",
+      action="append",
       required=False,
       help="Modrinth collection URL (or ID) for server mods"
     )

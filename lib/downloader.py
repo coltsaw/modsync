@@ -1,7 +1,10 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from colorama import Fore
 
+from lib.formatter import Formatter 
+
 class Downloader:
+
   def download_mods(mods, configs):
     total = len(mods)
     print(f"Found {total} mods to download")
@@ -26,24 +29,24 @@ class Downloader:
         start=1
       ):
         result = future.result()
+        collection = result['collection']
+        name = result['name']
 
         if result["status"] == "available":
           print(
-            f"[{index}/{total}] "
-            f"{Fore.GREEN}✓ {result['name']}{Fore.RESET}"
+            f"[{index}/{total}] {Formatter.pretty_collection(collection)} "
+            f"{Formatter.downloaded(name)}"
           )
 
           downloaded.append(result)
 
         else:
           print(
-              f"[{index}/{total}] "
-              f"{Fore.RED}✗ {result['name']}{Fore.RESET}"
+              f"[{index}/{total}] {Formatter.pretty_collection(collection)} "
+              f"{Formatter.failed(name)}"
           )
 
-          missing.append(
-              result["name"]
-          )
+          missing.append(name)
   
     print()
     print("=" * 50)

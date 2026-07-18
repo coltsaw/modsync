@@ -4,6 +4,7 @@ from lib.modrinth_client import ModrinthClient
 
 @dataclass
 class Mod:
+  collection_id: str
   name: str
   version: str
   file_name: str
@@ -13,7 +14,7 @@ class Mod:
     mods = []
     client = ModrinthClient()
 
-    collections = client.get_collections([configs.collection])
+    collections = client.get_collections(configs.collections)
 
     for c in collections:
       for project_id in c.project_ids:
@@ -27,6 +28,7 @@ class Mod:
         latest_version = max(versions, key=lambda v: v.date_published) if versions else None
 
         mods.append(Mod(
+          collection_id=c.id,
           name=project.name,
           version=latest_version.version_number if latest_version else None,
           file_name=latest_version.primary_file().filename if latest_version else None,
@@ -49,7 +51,8 @@ class Mod:
         print(f"Failed to download {self.name}: {e}")
         return {
           "status": "missing",
-          "name": self.name
+          "name": self.name,
+          "collection": self.collection_id
         }
       
       output = destination / self.file_name
@@ -57,6 +60,7 @@ class Mod:
       resp = {
         "status": "available",
         "name": self.name,
+        "collection": self.collection_id
       }
 
       if not dry_run:
@@ -71,5 +75,6 @@ class Mod:
     else:
       return {
         "status": "missing",
-        "name": self.name
+        "name": self.name,
+        "collection": self.collection_id
       }

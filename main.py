@@ -4,6 +4,7 @@ from lib.mod import Mod
 from lib.downloader import Downloader
 from colorama import init, Fore
 from version import __version__
+from lib.formatter import Formatter
 
 def main():
   # colors
@@ -30,7 +31,7 @@ def main():
   configs = configs.merge(Configs.from_args(args)).validate()
 
   print(f"{Fore.YELLOW}** DRY RUN **") if configs.dry_run else None
-  print(f"Collection: {configs.collection}")
+  print(f"Collections: {", ".join([Formatter.pretty_collection(c) for c in configs.collections])}")
   print(f"Minecraft version: {configs.mc_version}")
   print()
   

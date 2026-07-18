@@ -19,19 +19,19 @@ class Arguments:
 
     parser.add_argument(
       "--mc-version",
-      required=True,
+      required=False,
       help="Minecraft version to filter mods by"
     )
 
     parser.add_argument(
       "--loader",
-      required=True,
+      required=False,
       help="Mod loader to filter mods by (e.g., fabric, forge)"
     )
 
     parser.add_argument(
       "--collection",
-      required=True,
+      required=False,
       help="Modrinth collection URL (or ID) for server mods"
     )
 
@@ -39,14 +39,12 @@ class Arguments:
       "--output",
       required=False,
       type=Path,
-      default=Path("downloads"),
       help="Output directory for downloaded mods"
     )
 
     parser.add_argument(
       "--dry-run",
       action="store_true",
-      default=False,
       help="Resolve mods but do not download files"
     )
 

@@ -10,7 +10,7 @@ def main():
   init(autoreset=True)
   
   print("=" * 50)
-  print(f"modsync v{Fore.BLUE}{__version__}")
+  print(f"modsync {Fore.BLUE}v{__version__}")
   print("Download compatible mods from Modrinth collections.")
   print()
   print("This project is not affiliated with or endorsed by Modrinth.")
@@ -22,9 +22,13 @@ def main():
   print()
   print("Starting collection download...")
 
+  configs = Configs.from_yaml()
+
   args = Arguments.parse()
 
-  configs = Configs.from_args(args)
+  # allow for overrides from command line arguments
+  configs = configs.merge(Configs.from_args(args)).validate()
+
   print(f"{Fore.YELLOW}** DRY RUN **") if configs.dry_run else None
   print(f"Collection: {configs.collection}")
   print(f"Minecraft version: {configs.mc_version}")
